@@ -10,22 +10,27 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+{
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
+
             $table->string('razon_social',80);
             $table->string('direccion',80);
             $table->string('tipo_personas',20);
+
             $table->tinyInteger('estado')->default(1);
+
+            $table->foreignId('documento_id')->unique()->constrained('documento')->onDelete('cascade');
+
             $table->timestamps();
-        });
-    }
+    });
+} nm
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('oersonas');
+        Schema::dropIfExists('personas');
     }
 };
